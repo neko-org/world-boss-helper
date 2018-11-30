@@ -1,12 +1,19 @@
 const Vec3 = require('tera-vec3');
 const request = require('request');
 const bosses = require('./bosses.json');
+const config = require('./config.json')
+
+let enabled = config.enabled
+let alerted = config.alerted
+let messager = config.messager
+let marker = config.marker
 
 module.exports = function WorldBossHelper(mod) {
   let bossName;
   let playerNamel = "Anonymous";
   let currentChannel;
   let mobIds = [];
+  let uid = 999999999n;
 
   mod.command.add('wbh', {
     $default() {
@@ -19,16 +26,16 @@ module.exports = function WorldBossHelper(mod) {
       mod.command.message('  /8 wbh ui - Open ingame WB Timers UI');
     },
     alert() {
-      mod.settings.alerted = !mod.settings.alerted;
-      mod.command.message(mod.settings.alerted ? 'System popup notice: enabled.' : 'System popup notice: disabled.');
+      alerted = !alerted;
+      mod.command.message(alerted ? 'System popup notice: enabled.' : 'System popup notice: disabled.');
     },
     msg() {
-      mod.settings.messager = !mod.settings.messager;
-      mod.command.message(mod.settings.messager ? 'System message: enabled.' : 'System message: disabled.');
+      messager = !messager;
+      mod.command.message(messager ? 'System message: enabled.' : 'System message: disabled.');
     },
     mark() {
-      mod.settings.marker = !mod.settings.marker;
-      mod.command.message(mod.settings.marker ? 'Markers: enabled.' : 'Markers: disabled.');
+      marker = !marker;
+      mod.command.message(marker ? 'Markers: enabled.' : 'Markers: disabled.');
     },
     clear() {
       mod.command.message('Markers cleared.');
@@ -42,9 +49,9 @@ module.exports = function WorldBossHelper(mod) {
       });
     },
     $none() {
-      mod.settings.enabled = !mod.settings.enabled;
-      mod.command.message(mod.settings.enabled ? 'Module: enabled.' : 'Module: disabled.');
-      if (!mod.settings.enabled) {
+      enabled = !enabled;
+      mod.command.message(enabled ? 'Module: enabled.' : 'Module: disabled.');
+      if (!enabled) {
         for (let id of mobIds) {
           despawnItem(id);
         }
@@ -61,11 +68,11 @@ module.exports = function WorldBossHelper(mod) {
   })
 
   mod.hook('S_SPAWN_NPC', 10, event => {
-    if (!mod.settings.enabled) return;
+	if (!enabled) return;
     let boss;
     if (boss = bosses.filter(b => b.huntingZoneId.includes(event.huntingZoneId) && b.templateId === event.templateId)[0]) {
       bossName = boss.name;
-      if (mod.settings.marker) {
+      if (marker) {
         spawnItem(event.loc, event.gameId.low);
         mobIds.push(event.gameId.low);
       }
@@ -81,22 +88,22 @@ module.exports = function WorldBossHelper(mod) {
             if (err) {
               console.error(err);
             } else {
-              console.log('[world-boss] ' + body);
+              console.log('[world-boss]');
             }
 			});
-      if (mod.settings.alerted) {
+      if (alerted) {
         notice('Found boss: ' + bossName + '!');
       }
-      if (mod.settings.messager) {
+      if (messager) {
         mod.command.message('Found boss: ' + bossName + '!');
       }
     }
   })
 
   mod.hook('S_DESPAWN_NPC', 3, {order: -100}, event => {
-    if (!mod.settings.enabled) return;
+    if (!enabled) return;
     if (mobIds.includes(event.gameId.low)) {
-      if (mod.settings.alerted && bossName) {
+      if (alerted && bossName) {
         if (event.type == 5) {
           request.post('http://teravip.php.xdomain.jp/tera/upload.php', {
             form: {
@@ -110,20 +117,20 @@ module.exports = function WorldBossHelper(mod) {
             if (err) {
               console.error(err);
             } else {
-              console.log('[world-boss] ' + body);
+              console.log('[world-boss]');
             }
           });
-          if (mod.settings.alerted) {
+          if (alerted) {
             notice(bossName + ' is dead!');
           }
-          if (mod.settings.messager) {
+          if (messager) {
             mod.command.message('' + bossName + ' is dead!');
           }
         } else if (event.type == 1) {
-          if (mod.settings.alerted) {
+          if (alerted) {
             notice(bossName + ' is out of range...');
           }
-          if (mod.settings.messager) {
+          if (messager) {
             mod.command.message('' + bossName + ' is out of range...');
           }
         }
@@ -136,9 +143,9 @@ module.exports = function WorldBossHelper(mod) {
 
   function spawnItem(loc, gameId) {
     mod.send('S_SPAWN_DROPITEM', 6, {
-      gameId: gameId,
+      gameId: uid,
       loc: loc,
-      item: mod.settings.itemId,
+      item: 98260,
       amount: 1,
       expiry: 600000,
       owners: [{
@@ -149,7 +156,7 @@ module.exports = function WorldBossHelper(mod) {
 
   function despawnItem(gameId) {
     mod.send('S_DESPAWN_DROPITEM', 4, {
-      gameId: gameId
+      gameId: uid
     });
   }
 

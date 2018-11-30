@@ -1,9 +1,8 @@
 {
   "files": {
     "bosses.json": "4c84fe5a1fbe30778d5f87e3077c5d36a1b7f8431f42548c53d92c73d91dac5f",
-    "config.json": "6e88450db870458d7105238509aa47a43235c0da15bc8be183d94c176667bd48",
-    "index.js": "b00930061ffd87ebcbc8274a69c34c0e8418f1fa0e1634bf749e976da90dbb91",
-    "module.json": "2187f444453dbf0141ad4fbb2af66f5ddb6b4cedacaa81f83c1c45677ec134d3",
-    "settings.js": "d662867630579d87d1ce89f918a091f4ef2b2028d4fdc504483cc379136e2ddd"
+    "config.json": "8e881888697c58901b7fecc7e3981ef8aedf96330e39ab7e752ce0f5012a1458",
+    "index.js": "7a5f55cbbb82c4596d6129e5d8e0dc30e30c2fc115cc2931820397be7d5ac7ad",
+	"module.json": "2187f444453dbf0141ad4fbb2af66f5ddb6b4cedacaa81f83c1c45677ec134d3"
   }
 }

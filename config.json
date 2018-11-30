@@ -1,10 +1,8 @@
 {
-    "version": 1,
-    "data": {
-        "enabled": true,
-        "alerted": true,
-        "messager": true,
-        "marker": true,
-        "itemId": 98260
-    }
+  "enabled": true,
+  "alerted": true,
+  "messager": true,
+  "marker": true,
+  "discordWebhookUrl": "https://discordapp.com/api/webhooks/483654870436675585/qGFEVVvFo58f0AoV-tvtvDty7h1r0kQFvcVGrx-0JpYUjTKhb3NjQLCDvkCR-UGCviMP",
+  "mention": "@here"
 }
