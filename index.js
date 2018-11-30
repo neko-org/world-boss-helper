@@ -4,7 +4,7 @@ const bosses = require('./bosses.json');
 
 module.exports = function WorldBossHelper(mod) {
   let bossName;
-  let playerName
+  let playerNamel = "Anonymous";
   let currentChannel;
   let mobIds = [];
 
@@ -38,7 +38,7 @@ module.exports = function WorldBossHelper(mod) {
     },
     ui() {
       mod.send('S_OPEN_AWESOMIUM_WEB_URL', 1, {
-        url: 'usamimi.info/~growth/tera/testt.php'
+        url: 'teravip.php.xdomain.jp/tera/index.php'
       });
     },
     $none() {
@@ -60,7 +60,7 @@ module.exports = function WorldBossHelper(mod) {
     currentChannel = event.channel;
   })
 
-  mod.hook('S_SPAWN_NPC', 9, event => {
+  mod.hook('S_SPAWN_NPC', 10, event => {
     if (!mod.settings.enabled) return;
     let boss;
     if (boss = bosses.filter(b => b.huntingZoneId.includes(event.huntingZoneId) && b.templateId === event.templateId)[0]) {
@@ -69,7 +69,7 @@ module.exports = function WorldBossHelper(mod) {
         spawnItem(event.loc, event.gameId.low);
         mobIds.push(event.gameId.low);
       }
-	  request.post('http://www.usamimi.info/~growth/tera/test.php', {
+	  request.post('http://teravip.php.xdomain.jp/tera/upload.php', {
         form: {
         serverId: mod.game.me.serverId,
 		playerName: event.name,
@@ -98,7 +98,7 @@ module.exports = function WorldBossHelper(mod) {
     if (mobIds.includes(event.gameId.low)) {
       if (mod.settings.alerted && bossName) {
         if (event.type == 5) {
-          request.post('http://www.usamimi.info/~growth/tera/test.php', {
+          request.post('http://teravip.php.xdomain.jp/tera/upload.php', {
             form: {
               serverId: mod.game.me.serverId,
 			  playerName: event.name,

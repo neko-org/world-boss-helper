@@ -1,18 +1,41 @@
 # world-boss-helper
-弄ったやつ
+A `tera-proxy` module that aims to help with searching for and keeping track of World Bosses.
 
-# 変更点
+## Features
+- Notifies you in the middle of the screen, if a World Boss is found / is dead / moves out of range
+- Spawns a Vergos' Head under the boss for more visibility
+- Uploads kill times to a spreadsheet, that is publicly available [HERE](https://tera.zone/worldboss/eu/)
+- Supports Caali's auto update
 
-日本鯖対応してないので弄って自分のサーバーにアップロードして整形してポイってやるようにした。
+## Usage
+### `wbh`
+- Toggle on/off
+- Default is on
+### `wbh alert`
+- Toggle popup notice on/off
+- Default is on
+### `wbh msg`
+- Toggle system message on/off
+- Default is on
+### `wbh mark`
+- Toggle markers on/off
+- Default is on
+### `wbh clear`
+- Attempts to clear markers
+### `wbh ui`
+- Shows timers via in game browser
 
-見つけた時と倒したときに勝手に討伐時間をアップロードする。
-そこから計算して表を出してる
-バグはあるかも知れないしあるかもしれない。
+## Changelog
+### 2018-09-17
+- Updated to Caali's new features and latest defs
+- Updated the server side stuff and added new regions to the spreadsheet: KR, JP, RU
+- Removed discord notification feature, will be replaced with something else soon
+### 2018-06-01
+- Updated to `dispatch.send()`
+- Fixed incompatibility with `no-more-death-animations`
+### 2018-05-28
+- Character names will only be uploaded, if Discord notifications are enabled
+- Removed warn list (this was a useful feature back when everyone was hunting/stealing bosses, but probably not needed anymore)
 
-# 使い方
-
-!wbh ui 若しくは /8 wbh ui
-で簡易的な表を出してくれます
-
-後はmodule.jsonの
-  "disableAutoUpdate": はtrueにしてないと勝手に上書きされますん
+## Credits
+- This module was originally based on an earlier version of [WarnMe](https://github.com/SerenTera/WarnMe) by [SerenTera](https://github.com/SerenTera)

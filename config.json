@@ -1,8 +1,10 @@
 {
-  "enabled": true,
-  "alerted": true,
-  "messager": true,
-  "marker": true,
-  "discordWebhookUrl": "",
-  "mention": "@here"
+    "version": 1,
+    "data": {
+        "enabled": true,
+        "alerted": true,
+        "messager": true,
+        "marker": true,
+        "itemId": 98260
+    }
 }
