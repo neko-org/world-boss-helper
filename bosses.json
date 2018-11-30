@@ -1,31 +1,31 @@
 [
   {
-    "name": "カザスタン",
+    "name": "Betsael",
     "huntingZoneId": [57, 3932257, 13107257],
     "templateId": 33
   },
   {
-    "name": "ケスケレン",
-    "huntingZoneId": [38, 6553638, 13107238],
-    "templateId": 35
-  },
-  {
-    "name": "サシャラク",
+    "name": "Reaver",
     "huntingZoneId": [10, 6553610, 13107210],
     "templateId": 99
   },
   {
-    "name": "ラキアヌ",
+    "name": "Linyphi",
     "huntingZoneId": [51, 6553651, 13107251],
     "templateId": 7011
   },
   {
-    "name": "爆風のカナッシュ",
+    "name": "Nyxarras",
+    "huntingZoneId": [38, 6553638, 13107238],
+    "templateId": 35
+  },
+  {
+    "name": "Kanash",
     "huntingZoneId": [4, 6553604, 13107204],
     "templateId": 5011
   },
   {
-    "name": "スネグルトス",
+    "name": "Yunaras",
     "huntingZoneId": [52, 6553652, 13107252],
     "templateId": 9050
   }
