@@ -136,11 +136,7 @@ module.exports = function WorldBossHelper(mod) {
 
   function spawnItem(loc, gameId) {
     mod.send('S_SPAWN_DROPITEM', 6, {
-      gameId: {
-        low: gameId,
-        high: 0,
-        unsigned: true
-      },
+      gameId: gameId,
       loc: loc,
       item: mod.settings.itemId,
       amount: 1,
@@ -153,11 +149,7 @@ module.exports = function WorldBossHelper(mod) {
 
   function despawnItem(gameId) {
     mod.send('S_DESPAWN_DROPITEM', 4, {
-      gameId: {
-        low: gameId,
-        high: 0,
-        unsigned: true
-      }
+      gameId: gameId
     });
   }
 
